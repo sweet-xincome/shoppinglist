@@ -1,25 +1,13 @@
 import * as React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
-import BookScreen from '../screens/BooksScreen'
-import CartScreen from '../screens/CartScreen'
-import ShoppingCartIcon from '../components/ShoppingCartIcon'
+import BottomTabNavigator from '../navigation/BottomTabNavigator'
 
-const Stack = createStackNavigator()
-
-function MainStackNavigator() {
+function RootStackNavigator() {
   return(
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name={'Books'}
-          component={BookScreen}
-          options={{headerRight: props => <ShoppingCartIcon {...props} />}}
-        />
-        <Stack.Screen name={'Cart'} component={CartScreen} />
-      </Stack.Navigator>
+      <BottomTabNavigator />
     </NavigationContainer>
   );
 }
 
-export default MainStackNavigator
+export default RootStackNavigator
