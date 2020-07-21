@@ -1,6 +1,5 @@
 import React from 'react'
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import CompanyCircle from "../screens/CompanyCircle";
 import BookScreen from "../screens/BooksScreen";
 import ShoppingCartIcon from "../components/ShoppingCartIcon";
 import CartScreen from "../screens/CartScreen";
@@ -10,6 +9,7 @@ import Ionicons from 'react-native-vector-icons/AntDesign'
 import ConcantScreen from "../screens/ConcantScreen";
 import DepartmentScreen from "../screens/DepartmentScreen";
 import MyScreen from "../screens/MyScreen";
+import HomeTopTab from "./HomeTopTab";
 
 
 const Stack = createStackNavigator()
@@ -82,7 +82,7 @@ function XBottomTab() {
         inactiveTintColor: 'gray',
       }}
     >
-      <BottomTab.Screen name={'首页'} component={CompanyCircle} />
+      <BottomTab.Screen name={'首页'} component={HomeTopTab} />
       <BottomTab.Screen name={'公司圈'} component={MainStackNavigator} />
       <BottomTab.Screen name={'沟通'} component={ConcantScreen} />
       <BottomTab.Screen name={'部门'} component={DepartmentScreen} />
