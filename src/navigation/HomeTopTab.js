@@ -10,14 +10,24 @@ function StudyShare() {
   //fastlist列表渲染
   const Item = ({title, time, picture}) => {
     return(
-      <View style={styles.item}>
+      <View style={{
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        backgroundColor: 'white',
+        marginBottom: 1,
+        paddingRight: 10,
+        paddingLeft: 10,
+        paddingTop: 5,
+        paddingBottom: 5,
+      }}>
         <View>
           <Text style={styles.title}>{title}</Text>
-          <Text style={styles.title}>{time}</Text>
+          <Text style={{ color: 'gray', fontSize: 8}}>{time}</Text>
         </View>
         <Image
           source={{uri: picture}}
-          style={{width: 100, height: 100}}
+          style={{width: 50, height: 50}}
         />
       </View>
     );
@@ -25,6 +35,27 @@ function StudyShare() {
   const renderItem = ({item}) => (
     <Item title={item.title} time={item.time} picture={item.picture} />
   )
+  //title
+  function TitlePaper(){
+    return (
+      <View style={{
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingRight: 10,
+        paddingLeft: 10,
+        backgroundColor: 'white',
+        marginBottom: 1,
+        marginTop: 3,
+        paddingTop: 3,
+        paddingBottom: 3
+      }}>
+        <Text style={{fontSize: 10}}><View style={{backgroundColor: 10}} />新闻</Text>
+        <Text style={{fontSize: 10, color: 'blue'}}>进入<Ionicons name={'ios-chevron-forward-sharp'} color={'blue'} /></Text>
+      </View>
+    );
+  }
   //fastlist顶部组件
   const _header = () => {
     return (
@@ -45,6 +76,44 @@ function StudyShare() {
             <Text>HCM</Text>
           </View>
         </View>
+        <TitlePaper />
+      </View>
+    );
+  }
+  const _bottomFooter = () => {
+    return(
+      <View>
+        <TitlePaper />
+        <FlatList
+          data={paperlist}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          getItemLayout={(data,index)=>(
+            {length: 100, offset: (100+2) * index, index}
+          )}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        />
+      </View>
+    );
+  }
+  const _footer = () => {
+    return(
+      <View>
+        <TitlePaper />
+        <FlatList
+          data={paperlist}
+          ListFooterComponent={_bottomFooter}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          getItemLayout={(data,index)=>(
+            {length: 100, offset: (100+2) * index, index}
+          )}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        />
       </View>
     );
   }
@@ -65,6 +134,7 @@ function StudyShare() {
       <FlatList
         data={paperlist}
         ListHeaderComponent={_header}
+        ListFooterComponent={_footer}
         renderItem={renderItem}
         keyExtractor={item => item.id}
         getItemLayout={(data,index)=>(
@@ -168,7 +238,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     flexDirection: 'row',
-    marginTop: 10
+    marginTop: 3,
+    backgroundColor: 'white',
+    paddingTop: 5,
+    paddingBottom: 5,
+    marginBottom: 0,
   },
   companyName:{
     alignItems: 'center',
@@ -177,8 +251,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     color: 'black',
     fontSize: 13,
-    marginTop: 5,
-    marginBottom: 5
   },
   container: {
     flexDirection: 'row',   // 水平排布

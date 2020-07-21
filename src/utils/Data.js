@@ -54,21 +54,21 @@ export const paperlist = [
   {
     id: '1',
     title: 'First Item',
-    time: '2020-07-20',
+    time: '人力资源  2020-07-20',
     picture:
       'https://reactnative.dev/img/tiny_logo.png'
   },
   {
     id: '2',
     title: 'Second Item',
-    time: '2020-07-20',
+    time: '人力资源  2020-07-20',
     picture:
       'https://reactnative.dev/img/tiny_logo.png'
   },
   {
     id: '3',
     title: 'Third Item',
-    time: '2020-07-20',
+    time: '人力资源  2020-07-20',
     picture:
       'https://reactnative.dev/img/tiny_logo.png'
   },

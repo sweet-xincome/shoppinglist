@@ -6,7 +6,7 @@ import CartScreen from "../screens/CartScreen";
 import { createStackNavigator } from '@react-navigation/stack'
 
 import Ionicons from 'react-native-vector-icons/AntDesign'
-import ConcantScreen from "../screens/ConcantScreen";
+import CommunicationScreen from "../screens/CommunicationScreen";
 import DepartmentScreen from "../screens/DepartmentScreen";
 import MyScreen from "../screens/MyScreen";
 import HomeTopTab from "./HomeTopTab";
@@ -84,7 +84,7 @@ function XBottomTab() {
     >
       <BottomTab.Screen name={'首页'} component={HomeTopTab} />
       <BottomTab.Screen name={'公司圈'} component={MainStackNavigator} />
-      <BottomTab.Screen name={'沟通'} component={ConcantScreen} />
+      <BottomTab.Screen name={'沟通'} component={CommunicationScreen} />
       <BottomTab.Screen name={'部门'} component={DepartmentScreen} />
       <BottomTab.Screen name={'我的'} component={MyScreen} />
     </BottomTab.Navigator>
