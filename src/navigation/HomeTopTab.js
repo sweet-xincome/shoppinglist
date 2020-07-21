@@ -1,5 +1,5 @@
-import React from 'react'
-import {View, Text, TextInput, StyleSheet, FlatList, Image} from "react-native";
+import React,{useState} from 'react'
+import {View, Text, TextInput, StyleSheet, FlatList, Image,RefreshControl} from "react-native";
 import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
 import { createStackNavigator } from '@react-navigation/stack';
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -7,6 +7,7 @@ import RNApplySwiper from "../components/RNApplySwiper";
 import {paperlist} from '../utils/Data'
 
 function StudyShare() {
+  //fastlist列表渲染
   const Item = ({title, time, picture}) => {
     return(
       <View style={styles.item}>
@@ -14,22 +15,64 @@ function StudyShare() {
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.title}>{time}</Text>
         </View>
-        <Image  source={{uri: {picture}}} style={{width: 50, height: 50}}/>
+        <Image
+          source={{uri: picture}}
+          style={{width: 100, height: 100}}
+        />
       </View>
     );
   }
   const renderItem = ({item}) => (
     <Item title={item.title} time={item.time} picture={item.picture} />
   )
+  //fastlist顶部组件
+  const _header = () => {
+    return (
+      <View>
+        <RNApplySwiper />
+        <Text style={styles.companyName}>延锋伟世通汽车电子  欢迎你</Text>
+        <View style={styles.logoRow}>
+          <View >
+            <Ionicons name={'bulb-outline'} size={35} />
+            <Text>微建议</Text>
+          </View>
+          <View>
+            <Ionicons name={'planet-outline'} size={35} />
+            <Text>创新</Text>
+          </View>
+          <View>
+            <Ionicons name={'headset-outline'} size={35} />
+            <Text>HCM</Text>
+          </View>
+        </View>
+      </View>
+    );
+  }
+  //fastlist顶部刷新
+  const [refreshing, setRefreshing] = useState(false);
+  const wait = (timeout) => {
+    return new Promise(resolve => {
+      setTimeout(resolve, timeout);
+    });
+  }
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
 
   return (
     <View>
-      <RNApplySwiper />
-      <Text style={{marginLeft: 10, color: 'black', fontSize: 13, marginTop: 5, marginBottom: 5}}>延锋伟世通汽车电子  欢迎你</Text>
       <FlatList
         data={paperlist}
+        ListHeaderComponent={_header}
         renderItem={renderItem}
         keyExtractor={item => item.id}
+        getItemLayout={(data,index)=>(
+          {length: 100, offset: (100+2) * index, index}
+        )}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       />
     </View>
   );
@@ -54,6 +97,7 @@ function HomeTopTab() {
       style: {                    //设置整个tabbar样式(背景颜色等)
         paddingBottom:0,
         margin:0,
+        backgroundColor: 'white'
       },
     }}
     >
@@ -120,6 +164,22 @@ const RootRouteScreen = () => {
 }
 
 const styles = StyleSheet.create({
+  logoRow:{
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginTop: 10
+  },
+  companyName:{
+    alignItems: 'center',
+    backgroundColor: 'white',
+    lineHeight: 30,
+    paddingLeft: 10,
+    color: 'black',
+    fontSize: 13,
+    marginTop: 5,
+    marginBottom: 5
+  },
   container: {
     flexDirection: 'row',   // 水平排布
     paddingLeft: 10,
