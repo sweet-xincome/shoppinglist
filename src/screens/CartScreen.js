@@ -18,6 +18,8 @@ function CartScreen() {
   const cartItems = useSelector(state => state.cartItems)
   const dispatch = useDispatch()
 
+  console.log(cartItems)
+
   const removeItemFromCart = item =>
     dispatch({
       type: REMOVE_FROM_CART,

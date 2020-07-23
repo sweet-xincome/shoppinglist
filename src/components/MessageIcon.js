@@ -5,20 +5,19 @@ import {useSelector} from "react-redux";
 
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
-
-function ShoppingCartIcon() {
+function MessageIcon() {
   const navigation = useNavigation()
   const cartItems = useSelector(state => state.cartItems)
 
   return(
     <TouchableOpacity
-      onPress={() => navigation.navigate('Cart')}
+      onPress={() => navigation.navigate('PCBA科1')}
       style={{marginRight: 10}}
     >
       <View style={styles.itemCountContainer}>
         <Text style={styles.itemCountText}>{cartItems.length}</Text>
       </View>
-      <Ionicons name={'ios-cart'} size={25} color={'#101010'} />
+      <Ionicons name={'chatbox-ellipses-outline'} size={25} color={'#101010'} />
     </TouchableOpacity>
   )
 }
@@ -45,4 +44,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default ShoppingCartIcon
+export default MessageIcon

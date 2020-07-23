@@ -37,7 +37,7 @@ export default function RNApplySwiper() {
                 activeDot={
                   <View
                     style={{
-                      backgroundColor: 'red',
+                      backgroundColor: '#6495ed',
                       width: 16,
                       height: 8,
                       borderRadius: 4,
